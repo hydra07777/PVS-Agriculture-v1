@@ -6,8 +6,13 @@
  * LinkedIn, WhatsApp, Twitter/X, Discord, Telegram, Slack…) lisent
  * ces métadonnées depuis `app/layout.tsx` et `lib/seo.ts`.
  *
- * Image OG de couverture : /public/images/og-cover.jpg (1200×630)
- * Logo d'organisation    : /public/pvs-pwa/logo-fixed.png (87×71)
+ * Image OG de couverture : /public/images/og-cover.jpg (1080×763)
+ * Logo d'organisation    : /public/pvs-pwa/logo-fixed.png (512×512)
+ *
+ * ⚠️ Ces deux images sont produites par `npm run logos:regen`
+ * (scripts/regen-pvs-logos.mjs) depuis la source `public/images/og-cover.jpg`.
+ * Si la source change, relancer le script PUIS mettre à jour les dimensions
+ * ci-dessous : les crawlers sociaux et Google indexent ces valeurs.
  *
  * Note : ce module est volontairement "feuille" (pas d'import depuis
  * `@/lib/seo`) pour éviter une circular dependency avec `lib/seo.ts`.
@@ -45,20 +50,35 @@ export const siteName = "PVS ONGD ASBL";
 /** Image de couverture principale, partagée par OG et Twitter. */
 export const ogCover = {
   url: "/images/og-cover.jpg",
-  // Le fichier source fait 1200×630 (ratio 1.91:1, standard OG).
-  width: 1200,
-  height: 630,
+  // Dimensions réelles du fichier source (vérifiées avec sharp).
+  width: 1080,
+  height: 763,
   alt: `${siteName} — Agriculture, Élevage, Pisciculture à Kinshasa`,
   type: "image/jpeg" as const,
 } as const;
 
-/** Logo carré pour `og:logo`, JSON-LD Organization.logo, etc. */
+/**
+ * Logo carré officiel, exposé via `og:logo` et JSON-LD Organization.logo.
+ * Fond opaque : c'est le format attendu par les crawlers sociaux.
+ */
 export const ogLogo = {
   url: "/pvs-pwa/logo-fixed.png",
-  width: 87,
-  height: 71,
+  width: 512,
+  height: 512,
   alt: `Logo ${siteName}`,
   type: "image/png" as const,
+} as const;
+
+/**
+ * Logo affiché dans l'interface (navbar, footer, sidebar admin, connexion).
+ * Même artwork que `ogLogo`, mais avec un alpha circulaire pour se fondre
+ * sur les fonds clairs comme sur les fonds sombres.
+ */
+export const brandLogo = {
+  url: "/pvs-pwa/logo-transparent.png",
+  width: 512,
+  height: 512,
+  alt: `Logo ${siteName}`,
 } as const;
 
 /** Favicons (résolutions classiques + ICO fallback). */
@@ -130,8 +150,7 @@ export const openGraphBase: Metadata["openGraph"] = {
 export const twitterBase: NonNullable<Metadata["twitter"]> = {
   card: "summary_large_image",
   title: siteName,
-  description:
-    "PVS ONGD ASBL — Agriculture, Élevage, Pisciculture à Kinshasa.",
+  description: "PVS ONGD ASBL — Agriculture, Élevage, Pisciculture à Kinshasa.",
   images: [
     {
       url: ogCover.url,

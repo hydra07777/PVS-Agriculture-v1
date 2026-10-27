@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import type { Product } from "@prisma/client";
 
 import { contact, siteMeta } from "@/lib/content";
-import { logoAbsoluteUrl, ogCover, siteName, siteUrl } from "@/lib/og";
+import { logoAbsoluteUrl, ogCover, ogLogo, siteName, siteUrl } from "@/lib/og";
 
 // `siteUrl` et `siteName` sont définis dans `@/lib/og` (module "feuille"
 // sans dépendance vers ce fichier, pour éviter les cycles d'import).
@@ -90,8 +90,8 @@ export function organizationJsonLd() {
     logo: {
       "@type": "ImageObject",
       url: logoAbsoluteUrl,
-      width: 87,
-      height: 71,
+      width: ogLogo.width,
+      height: ogLogo.height,
     },
     image: logoAbsoluteUrl,
     description: siteMeta.description,
