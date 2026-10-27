@@ -1,15 +1,44 @@
-import { brand } from "@/lib/content";
+import Image from "next/image";
 
-export default function BrandBadge() {
+import { brand } from "@/lib/content";
+import { brandLogo } from "@/lib/og";
+
+type BrandBadgeProps = {
+  /** Côté du logo en pixels (défaut : 46px, taille de la navbar). */
+  size?: number;
+  className?: string;
+  /** `true` pour un rendu prioritaire (LCP) — à réserver au logo du hero. */
+  priority?: boolean;
+};
+
+/**
+ * Logo officiel PVS (image `public/pvs-pwa/logo-transparent.png`, générée
+ * depuis `public/images/og-cover.jpg` par `npm run logos:regen`).
+ *
+ * Le fichier a un alpha circulaire : il se pose aussi bien sur le fond clair
+ * de la navbar que sur le fond sombre du footer ou de la page de connexion.
+ *
+ * Le nom de la marque reste en texte à côté dans les appelants (accessibilité
+ * et référencement), l'image est donc purement décorative.
+ */
+export default function BrandBadge({
+  size = 46,
+  className = "",
+  priority = false,
+}: BrandBadgeProps) {
   return (
-    <div className="relative flex h-[46px] w-[46px] shrink-0 items-center justify-center overflow-hidden rounded-full bg-brand-600 shadow-brand">
-      <span
-        aria-hidden="true"
-        className="absolute -bottom-1.5 left-[8%] right-[8%] h-[60%] rounded-[50%] bg-white"
-      />
-      <span className="relative z-[2] -translate-y-2 font-serif text-base font-extrabold text-white">
-        {brand.name}
-      </span>
-    </div>
+    <Image
+      src={brandLogo.url}
+      alt=""
+      aria-hidden="true"
+      width={size}
+      height={size}
+      priority={priority}
+      sizes={`${size}px`}
+      className={`shrink-0 select-none rounded-full object-contain shadow-brand ${className}`}
+    />
   );
 }
+
+/** Nom de la marque, réutilisé dans les infobulles et libellés accessibles. */
+export const brandLabel = `${brand.name} ${brand.tagline}`;

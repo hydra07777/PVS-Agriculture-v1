@@ -5,6 +5,7 @@ import type { ComponentType } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
+import BrandBadge from "@/components/layout/BrandBadge";
 import {
   BarChart3,
   ExternalLink,
@@ -158,9 +159,7 @@ export default function Sidebar({
     <div className="flex h-full flex-col">
       {/* Logo & titre */}
       <div className="flex items-center gap-3 border-b border-line px-6 py-5">
-        <div className="flex h-9 w-9 items-center justify-center rounded-[10px] bg-brand-600 font-serif text-[13px] font-bold text-white shadow-brand">
-          PVS
-        </div>
+        <BrandBadge size={36} />
         <div>
           <p className="font-serif text-[15px] font-bold leading-tight text-brand-900">
             Espace admin

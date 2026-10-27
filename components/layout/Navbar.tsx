@@ -84,7 +84,9 @@ export default function Navbar() {
       >
         <div className="mx-auto flex max-w-shell items-center justify-between px-7 py-4">
           <Link href={brand.homeHref} className="flex items-center gap-3">
-            <BrandBadge />
+            {/* `priority` : le header est fixe, le logo est donc visible dès
+                le premier rendu (candidat LCP de la page). */}
+            <BrandBadge priority />
             <span className="block">
               <span className="block font-serif text-[19px] font-bold leading-[1.1] text-brand-900">
                 {brand.name}
