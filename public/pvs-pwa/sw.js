@@ -1,4 +1,5 @@
-const CACHE_NAME = "pvs-cache-v1";
+// `v2` : bump à chaque changement d'asset logo/icône (npm run logos:regen).
+const CACHE_NAME = "pvs-cache-v2";
 const ASSETS_TO_CACHE = [
   "./",
   "./index.html",
