@@ -211,8 +211,8 @@ export const activities: Activity[] = [
     description:
       "Production et exploitation de cultures vivrières adaptées au terroir local.",
     href: "/agriculture",
-    imageSrc: "/images/photo-1500382017468-9049fed747ef.jpg",
-    imageAlt: "Champ de maïs",
+    imageSrc: "/images/archive/vue-elevage.png",
+    imageAlt: "Champ",
   },
   {
     slug: "elevage",
@@ -220,8 +220,8 @@ export const activities: Activity[] = [
     description:
       "Un élevage suivi avec soin pour une croissance saine du cheptel.",
     href: "/elevage",
-    imageSrc: "/images/photo-1500534623283-312aade485b7.jpg",
-    imageAlt: "Troupeau de bétail dans un pâturage",
+    imageSrc: "/images/archive/poulailler-pondeuses-1-640.webp",
+    imageAlt: "",
   },
   {
     slug: "pisciculture",
@@ -229,7 +229,7 @@ export const activities: Activity[] = [
     description:
       "Élevage de poissons en étangs contrôlés pour une production maîtrisée.",
     href: "/pisciculture",
-    imageSrc: "/images/photo-1544551763-46a013bb70d5.jpg",
+    imageSrc: "/images/archive/etang-avec-nenuphars-1200.webp",
     imageAlt: "Étang de pisciculture",
   },
   {
@@ -238,7 +238,7 @@ export const activities: Activity[] = [
     description:
       "Une porcherie gérée selon des normes d'hygiène et de bien-être animal strictes.",
     href: "/porcherie",
-    imageSrc: "/images/photo-1516467508483-a7212febe31a.jpg",
+    imageSrc: "/images/archive/truie-porcelets-hero-640.webp",
     imageAlt: "Porcherie moderne",
   },
   {
@@ -247,7 +247,7 @@ export const activities: Activity[] = [
     description:
       "Vente de produits et d'aliments de qualité pour un élevage performant.",
     href: "/produits-animaux",
-    imageSrc: "/images/photo-1574943320219-553eb213f72d.jpg",
+    imageSrc: "/images/archive/produit-animaux.png",
     imageAlt: "Sacs d'aliments pour animaux",
   },
 ];
@@ -432,7 +432,7 @@ export const agriculturePage: AgriculturePageContent = {
           name: "Feuilles de manioc",
           description:
             "Les feuilles de manioc sont cultivées en plate-bande sur notre domaine. Riches en protéines et en nutriments, elles sont récoltées fraîches et à la demande pour préserver toutes leurs qualités nutritionnelles et leur goût authentique.",
-          imageSrc: "/images/archive/etang-paysage-manguiers-1200.webp",
+          imageSrc: "/images/archive/vue-elevage.png",
           imageAlt: "Plate-bande de feuilles de manioc",
         },
         {
@@ -580,8 +580,8 @@ export const aproposPage: AboutPageContent = {
         description:
           "Production et exploitation de cultures vivrières adaptées au terroir local.",
         href: "/agriculture",
-        imageSrc: "/images/photo-1500382017468-9049fed747ef.jpg",
-        imageAlt: "Champ agricole verdoyant au lever du soleil",
+        imageSrc: "/images/archive/vue-elevage.png",
+        imageAlt: "Champ agricole verdoyant",
       },
       {
         icon: "cattle",
@@ -589,8 +589,8 @@ export const aproposPage: AboutPageContent = {
         description:
           "Un élevage suivi avec soin pour une croissance saine du cheptel.",
         href: "/elevage",
-        imageSrc: "/images/photo-1500534623283-312aade485b7.jpg",
-        imageAlt: "Troupeau de bétail dans un pâturage",
+        imageSrc: "/images/archive/poulailler-pondeuses-1-640.webp",
+        imageAlt: "",
       },
       {
         icon: "fish",
@@ -598,7 +598,7 @@ export const aproposPage: AboutPageContent = {
         description:
           "Élevage de poissons en étangs contrôlés pour une production maîtrisée.",
         href: "/pisciculture",
-        imageSrc: "/images/photo-1535473895227-bdecb20fb373.jpg",
+        imageSrc: "/images/archive/etang-avec-nenuphars-1200.webp",
         imageAlt: "Étang de pisciculture avec poissons",
       },
       {
@@ -607,7 +607,7 @@ export const aproposPage: AboutPageContent = {
         description:
           "Une porcherie gérée selon des normes d'hygiène et de bien-être animal strictes.",
         href: "/porcherie",
-        imageSrc: "/images/photo-1516467508483-a7212febe31a.jpg",
+        imageSrc: "/images/archive/truie-porcelets-hero-640.webp",
         imageAlt: "Porcherie moderne et propre",
       },
       {
@@ -616,7 +616,7 @@ export const aproposPage: AboutPageContent = {
         description:
           "Vente de produits et d'aliments de qualité pour un élevage performant.",
         href: "/produits-animaux",
-        imageSrc: "/images/photo-1604908554049-29bf08f5d1a9.jpg",
+        imageSrc: "/images/archive/produit-animaux.png",
         imageAlt: "Sacs d'aliment pour animaux",
       },
     ],
@@ -737,8 +737,8 @@ export const elevagePage: ElevagePageContent = {
     paragraph:
       "L'élevage est l'un des piliers de PVS ONGD ASBL. Nous assurons un suivi attentif du cheptel, avec des pratiques d'hygiène strictes et une alimentation contrôlée, pour garantir des produits sains et une croissance harmonieuse des animaux.",
     // [PLACEHOLDER] Photo d'illustration locale
-    imageSrc: "/images/photo-1600428853876-6b57d20b9da6.jpg",
-    imageAlt: "Vaches paissant dans un pâturage verdoyant",
+    imageSrc: "/images/archive/truie-porcelets-hero-1200.webp",
+    imageAlt: "Truie paissant dans un enclos",
   },
 
   gallery: {
@@ -749,7 +749,7 @@ export const elevagePage: ElevagePageContent = {
     slides: [
       {
         // [PLACEHOLDER] Photo d'illustration locale
-        src: "/images/photo-1587213128862-80345e23a71a.jpg",
+        src: "/images/archive/truie-porcelets-hero-1200.webp",
         alt: "Porc dans leurs enclosures",
         caption: "Porcs dans leurs enclosures",
       },
@@ -772,9 +772,9 @@ export const elevagePage: ElevagePageContent = {
       },
       {
         // [PLACEHOLDER] Photo d'illustration locale
-        src: "/images/photo-1543374996-3a5d6b3e5e4e.jpg",
-        alt: "Soignant s'occupant d'un animal",
-        caption: "Suivi vétérinaire quotidien",
+        src: "/images/archive/poulailler-interieur-2-640.webp",
+        alt: "Volailles",
+        caption: "Volailles",
       },
     ],
   },
@@ -1244,7 +1244,7 @@ export const produitsAnimauxPage: ProduitsAnimauxPageContent = {
       "Croissance",
       "Livraison",
     ],
-    imageSrc: "/images/photo-1589923188651-268a976c1753.jpg",
+    imageSrc: "/images/archive/produit-animaux.png",
     imageAlt: "Granulés d'aliment pour animaux",
     products: [
       {
@@ -1265,14 +1265,14 @@ export const produitsAnimauxPage: ProduitsAnimauxPageContent = {
         name: "Aliment pour volailles",
         description:
           "Mélange complet pour poulets, poules pondeuses et autres volailles. Riche en protéines et en acides aminés essentiels, il assure une croissance rapide, une bonne conversion alimentaire et une production d'œufs régulière.",
-        imageSrc: "/images/photo-1604908554049-29bf08f5d1a9.jpg",
+        imageSrc: "/images/archive/produit-animaux.png",
         imageAlt: "Aliment pour volailles",
       },
       {
         name: "Aliment pour poissons",
         description:
           "Granulés flottants et coulants pour tilapia et poisson-chat. Formulation équilibrée en protéines et lipides pour une croissance rapide, une meilleure santé et un rendement optimal en étang.",
-        imageSrc: "/images/photo-1604908554049-29bf08f5d1a9.jpg",
+        imageSrc: "/images/archive/produit-animaux.png",
         imageAlt: "Aliment pour poissons",
       },
     ],
