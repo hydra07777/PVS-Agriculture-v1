@@ -7,13 +7,42 @@ import { ADMIN_SESSION_COOKIE, verifyAdminSessionToken } from "@/lib/auth";
 // Le proxy s'exécute toujours sur le runtime Node.js par défaut sous
 // Next.js 16, donc cette déclaration déclenche une erreur de build.
 
-function buildCsp(nonce: string): string {
+/**
+ * CSP du site.
+ *
+ * ⚠️ Pourquoi PAS de nonce (`'nonce-…'`) ni de `'strict-dynamic'` ?
+ *
+ * Next.js n'applique le nonce de la CSP qu'aux pages rendues À LA
+ * REQUÊTE (SSR/ISR). Les pages prérendues (`/`, `/agriculture`,
+ * `/tarifs`, `/contact`…) sont sérialisées dans `.next/server/app/**.html`
+ * AU MOMENT DU BUILD : aucun en-tête de requête n'existe à ce moment-là,
+ * donc aucun nonce n'est disponible et les `<script>` sont sérialisés
+ * SANS attribut `nonce`.
+ *
+ * Or, dès qu'un nonce est présent dans `script-src` :
+ *   1. le navigateur IGNORE `'unsafe-inline'` (CSP Level 3) ;
+ *   2. avec `'strict-dynamic'`, il ignore aussi `'self'` (l'allowlist
+ *      par hôte est désactivée).
+ * Il ne reste alors plus AUCUNE source valide : ni les chunks servies
+ * depuis notre propre domaine, ni le payload RSC inline de Next.js.
+ *
+ * Conséquence observée en production : la page s'affiche mais reste
+ * bloquée sur `app/loading.tsx` (PageLoader), car l'hydratation React
+ * ne démarre jamais (tous les scripts bloqués par la CSP).
+ *
+ * On applique donc une CSP SANS nonce, compatible pages statiques ET
+ * dynamiques. Les protections fortes restent actives : `object-src
+ * 'none'`, `base-uri 'self'`, `form-action 'self'`, `frame-ancestors
+ * 'none'`, `default-src 'self'`.
+ */
+function buildCsp(): string {
   const isDev = process.env.NODE_ENV === "development";
   return [
     "default-src 'self'",
-    // 'strict-dynamic' : les scripts chargés par un script nonce sont fiables.
-    // unsafe-eval requis en dev (Webpack HMR).
-    `script-src 'self' 'nonce-${nonce}' 'strict-dynamic'${isDev ? " 'unsafe-eval'" : ""}`,
+    // 'unsafe-eval' requis en dev (Webpack HMR / source maps).
+    // ⚠️ Ne JAMAIS ajouter un nonce ici : il neutraliserait
+    // 'unsafe-inline' et re-bloquerait les scripts des pages statiques.
+    `script-src 'self' 'unsafe-inline'${isDev ? " 'unsafe-eval'" : ""}`,
     // Tailwind produit du CSS compilé, mais framer-motion et les libs de
     // charts injectent des styles inline.
     "style-src 'self' 'unsafe-inline'",
@@ -31,17 +60,10 @@ function buildCsp(nonce: string): string {
 export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
-  const csp = buildCsp(nonce);
-
-  const requestHeaders = new Headers(request.headers);
-  requestHeaders.set("x-nonce", nonce);
-  requestHeaders.set("Content-Security-Policy", csp);
+  const csp = buildCsp();
 
   const next = () => {
-    const response = NextResponse.next({
-      request: { headers: requestHeaders },
-    });
+    const response = NextResponse.next();
     response.headers.set("Content-Security-Policy", csp);
     return response;
   };
